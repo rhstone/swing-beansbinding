@@ -206,12 +206,10 @@ public final class JTableAdapterProvider implements BeanAdapterProvider {
             return false;
         }
 
-        property = property.intern();
-
-        return property == SELECTED_ELEMENT_P ||
-               property == SELECTED_ELEMENT_IA_P ||
-               property == SELECTED_ELEMENTS_P ||
-               property == SELECTED_ELEMENTS_IA_P;
+        return property.equals(SELECTED_ELEMENT_P) ||
+               property.equals(SELECTED_ELEMENT_IA_P) ||
+               property.equals(SELECTED_ELEMENTS_P) ||
+               property.equals(SELECTED_ELEMENTS_IA_P);
                  
     }
 

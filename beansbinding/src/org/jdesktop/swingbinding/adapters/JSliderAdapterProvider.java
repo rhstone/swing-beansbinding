@@ -82,11 +82,9 @@ public final class JSliderAdapterProvider implements BeanAdapterProvider {
         if (!JSlider.class.isAssignableFrom(type)) {
             return false;
         }
-
-        property = property.intern();
         
-        return property == PROPERTY_BASE ||
-               property == IGNORE_ADJUSTING;
+        return property.equals(PROPERTY_BASE) ||
+               property.equals(IGNORE_ADJUSTING);
     }
 
     public Object createAdapter(Object source, String property) {

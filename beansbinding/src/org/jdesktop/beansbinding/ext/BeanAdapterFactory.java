@@ -100,7 +100,6 @@ public final class BeanAdapterFactory {
             throw new IllegalArgumentException();
         }
         loadProvidersIfNecessary();
-        property = property.intern();
         BeanAdapterProvider provider = getProvider(source, property);
         if (provider != null) {
             List<VendedAdapter> adapters = vendedAdapters.get(source);
@@ -110,7 +109,7 @@ public final class BeanAdapterFactory {
                     Object adapter = vendedAdapter.getAdapter();
                     if (adapter == null) {
                         vendedAdapters.remove(i);
-                    } else if (vendedAdapter.getProvider() == provider && vendedAdapter.getProperty() == property) {
+                    } else if (vendedAdapter.getProvider() == provider && vendedAdapter.getProperty().equals(property)) {
                         return adapter;
                     }
                 }

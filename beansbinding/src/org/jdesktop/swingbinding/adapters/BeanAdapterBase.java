@@ -16,7 +16,7 @@ public class BeanAdapterBase {
 
     protected BeanAdapterBase(String property) {
         assert property != null;
-        this.property = property.intern();
+        this.property = property;
     }
 
     protected void listeningStarted() {}
@@ -66,7 +66,7 @@ public class BeanAdapterBase {
     }
 
     public final void addPropertyChangeListener(String property, PropertyChangeListener listener) {
-        if (listener == null || property == null || property.intern() != this.property) {
+        if (listener == null || property == null || !property.equals(this.property)) {
             return;
         }
 
@@ -84,7 +84,7 @@ public class BeanAdapterBase {
     }
 
     public final void removePropertyChangeListener(String property, PropertyChangeListener listener) {
-        if (listener == null || support == null || property == null || property.intern() != this.property) {
+        if (listener == null || support == null || property == null || !property.equals(this.property)) {
             return;
         }
 
@@ -97,7 +97,7 @@ public class BeanAdapterBase {
     }
 
     public final PropertyChangeListener[] getPropertyChangeListeners(String property) {
-        if (support == null || property == null || property.intern() != this.property) {
+        if (support == null || property == null || !property.equals(this.property)) {
             return new PropertyChangeListener[0];
         }
 

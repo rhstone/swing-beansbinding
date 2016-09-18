@@ -319,12 +319,8 @@ public final class ELProperty<S, V> extends PropertyHelper<S, V> {
                 return;
             }
 
-            if (property != null) {
-                property = property.intern();
-            }
-
             for (RegisteredListener rl : registeredListeners) {
-                if (rl.getSource() == source && (property == null || rl.getProperty() == property)) {
+                if (rl.getSource() == source && (property == null || rl.getProperty().equals(property))) {
                     processSourceChanged();
                     break;
                 }
@@ -880,9 +876,6 @@ public final class ELProperty<S, V> extends PropertyHelper<S, V> {
         
         RegisteredListener(Object source, String property) {
             this.source = source;
-            if (property != null) {
-                property = property.intern();
-            }
             this.property = property;
         }
         
@@ -898,11 +891,20 @@ public final class ELProperty<S, V> extends PropertyHelper<S, V> {
             if (obj == this) {
                 return true;
             }
-            if (obj instanceof RegisteredListener) {
-                RegisteredListener orl = (RegisteredListener) obj;
-                return (orl.source == source && orl.property == property);
+            if (obj == null) {
+                return false;
             }
-            return false;
+            if (getClass() != obj.getClass()) {
+                return false;
+            }
+            final RegisteredListener orl = (RegisteredListener) obj;
+            if (this.source != orl.source) {
+                return false;
+            }
+            if ((this.property == null) ? (orl.property != null) : !this.property.equals(orl.property)) {
+                return false;
+            }
+            return true;
         }
 
         public int hashCode() {

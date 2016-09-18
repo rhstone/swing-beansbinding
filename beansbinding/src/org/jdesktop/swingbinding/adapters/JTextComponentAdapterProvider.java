@@ -205,11 +205,9 @@ public final class JTextComponentAdapterProvider implements BeanAdapterProvider 
             return false;
         }
 
-        property = property.intern();
-
-        return property == PROPERTY_BASE ||
-               property == ON_ACTION_OR_FOCUS_LOST ||
-               property == ON_FOCUS_LOST;
+        return property.equals(PROPERTY_BASE) ||
+               property.equals(ON_ACTION_OR_FOCUS_LOST) ||
+               property.equals(ON_FOCUS_LOST);
                  
     }
     

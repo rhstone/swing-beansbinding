@@ -92,11 +92,6 @@ abstract class PropertyPath {
         
         public MultiPropertyPath(String[] path) {
             this.path = path;
-
-            for (int i = 0; i < path.length; i++) {
-                path[i] = path[i].intern();
-            }
-
             assert (path.length > 0);
         }
 
@@ -124,7 +119,7 @@ abstract class PropertyPath {
         private final String path;
         
         public SinglePropertyPath(String path) {
-            this.path = path.intern();
+            this.path = path;
         }
 
         public int length() {

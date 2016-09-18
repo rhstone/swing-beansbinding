@@ -67,7 +67,7 @@ public final class JComboBoxAdapterProvider implements BeanAdapterProvider {
     }
 
     public boolean providesAdapter(Class<?> type, String property) {
-        return JComboBox.class.isAssignableFrom(type) && property.intern() == SELECTED_ITEM_P;
+        return JComboBox.class.isAssignableFrom(type) && property.equals(SELECTED_ITEM_P);
     }
 
     public Object createAdapter(Object source, String property) {
