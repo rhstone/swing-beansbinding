@@ -6,9 +6,9 @@
 package org.jdesktop.el.impl.lang;
 
 import java.util.ArrayList;
-import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
+import java.util.concurrent.CopyOnWriteArraySet;
 import org.jdesktop.el.ELContext;
 import org.jdesktop.el.ELResolver;
 import org.jdesktop.el.Expression;
@@ -40,8 +40,8 @@ public final class EvaluationContext extends ELContext {
         this.varMapper = varMapper;
         this.expression = expression;
         if (trackResolvedProperties) {
-            resolvedProperties = new LinkedHashSet<Expression.ResolvedProperty>(1);
-            currentIdentifierProperties = new LinkedHashSet<Expression.ResolvedProperty>(1);
+            resolvedProperties = new CopyOnWriteArraySet<Expression.ResolvedProperty>();
+            currentIdentifierProperties = new CopyOnWriteArraySet<Expression.ResolvedProperty>();
         } else {
             resolvedProperties = null;
             currentIdentifierProperties = null;

@@ -15,6 +15,7 @@ import java.beans.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArraySet;
 import org.jdesktop.observablecollections.ObservableMap;
 import org.jdesktop.observablecollections.ObservableMapListener;
 import static org.jdesktop.beansbinding.PropertyStateEvent.UNREADABLE;
@@ -181,7 +182,7 @@ public final class ELProperty<S, V> extends PropertyHelper<S, V> {
                 baseProperty.addPropertyStateListener(source, this);
             }
 
-            registeredListeners = new HashSet<RegisteredListener>(1);
+            registeredListeners = new CopyOnWriteArraySet<RegisteredListener>();
             updateCachedBean();
             updateCache();
         }
@@ -210,7 +211,7 @@ public final class ELProperty<S, V> extends PropertyHelper<S, V> {
 
         private void updateCache() {
             lastRegisteredListeners = registeredListeners;
-            registeredListeners = new HashSet<RegisteredListener>(lastRegisteredListeners.size());
+            registeredListeners = new CopyOnWriteArraySet<RegisteredListener>();
             List<ResolvedProperty> resolvedProperties = null;
 
             try {

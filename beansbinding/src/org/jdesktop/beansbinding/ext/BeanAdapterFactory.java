@@ -13,14 +13,13 @@ import java.io.UnsupportedEncodingException;
 import java.lang.ref.WeakReference;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Enumeration;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 import java.beans.*;
+import java.util.concurrent.CopyOnWriteArraySet;
 import org.jdesktop.el.impl.util.CachingIntrospector;
 
 public final class BeanAdapterFactory {
@@ -40,8 +39,8 @@ public final class BeanAdapterFactory {
 
     public BeanAdapterFactory() {
         this.providers = new ArrayList<BeanAdapterProvider>();
-        classLoaders = new HashSet<ClassLoader>();
-        serviceURLs = new HashSet<URL>();
+        classLoaders = new CopyOnWriteArraySet<ClassLoader>();
+        serviceURLs = new CopyOnWriteArraySet<URL>();
         vendedAdapters = new WeakHashMap<Object, List<VendedAdapter>>();
     }
 
