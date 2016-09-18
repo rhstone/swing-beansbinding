@@ -10,7 +10,6 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Modifier;
 import java.beans.FeatureDescriptor;
 import java.beans.BeanInfo;
-import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.beans.IntrospectionException;
 import java.util.Iterator;
@@ -18,6 +17,7 @@ import java.util.ArrayList;
 import java.util.Map;
 import java.util.HashMap;
 import java.util.concurrent.ConcurrentHashMap;
+import org.jdesktop.el.impl.util.CachingIntrospector;
 
 /**
  * Defines property resolution behavior on objects using the JavaBeans
@@ -112,7 +112,7 @@ public class BeanELResolver extends ELResolver {
             this.baseClass = baseClass;
             PropertyDescriptor[] descriptors;
             try {
-                BeanInfo info = Introspector.getBeanInfo(baseClass);
+                BeanInfo info = CachingIntrospector.getBeanInfo(baseClass);
                 descriptors = info.getPropertyDescriptors();
             } catch (IntrospectionException ie) {
                 throw new ELException(ie);
@@ -439,7 +439,7 @@ public class BeanELResolver extends ELResolver {
 
         BeanInfo info = null;
         try {
-            info = Introspector.getBeanInfo(base.getClass());
+            info = CachingIntrospector.getBeanInfo(base.getClass());
         } catch (Exception ex) {
         }
         if (info == null) {

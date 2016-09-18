@@ -6,7 +6,6 @@
 package org.jdesktop.el.impl.util;
 
 import java.beans.IntrospectionException;
-import java.beans.Introspector;
 import java.beans.PropertyDescriptor;
 import java.lang.reflect.Array;
 import java.lang.reflect.Method;
@@ -193,7 +192,7 @@ public class ReflectionUtil {
         String name = ELSupport.coerceToString(property);
         PropertyDescriptor p = null;
         try {
-            PropertyDescriptor[] desc = Introspector.getBeanInfo(
+            PropertyDescriptor[] desc = CachingIntrospector.getBeanInfo(
                     base.getClass()).getPropertyDescriptors();
             for (int i = 0; i < desc.length; i++) {
                 if (desc[i].getName().equals(name)) {

@@ -19,6 +19,7 @@ import org.jdesktop.observablecollections.ObservableMap;
 import org.jdesktop.observablecollections.ObservableMapListener;
 import static org.jdesktop.beansbinding.PropertyStateEvent.UNREADABLE;
 import org.jdesktop.beansbinding.ext.BeanAdapterFactory;
+import org.jdesktop.el.impl.util.CachingIntrospector;
 
 /**
  * An implementation of {@code Property} that allows Java Beans properties of
@@ -708,7 +709,7 @@ public final class ELProperty<S, V> extends PropertyHelper<S, V> {
         assert object != null;
 
         try {
-            return Introspector.getBeanInfo(object.getClass());
+            return CachingIntrospector.getBeanInfo(object.getClass());
         } catch (IntrospectionException ie) {
             throw new PropertyResolutionException("Exception while introspecting " + object.getClass().getName(), ie);
         }

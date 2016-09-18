@@ -21,6 +21,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.WeakHashMap;
 import java.beans.*;
+import org.jdesktop.el.impl.util.CachingIntrospector;
 
 public final class BeanAdapterFactory {
     private static final BeanAdapterFactory INSTANCE =  new BeanAdapterFactory();
@@ -137,7 +138,7 @@ public final class BeanAdapterFactory {
 
     private static BeanInfo getBeanInfo(Class<?> type) {
         try {
-            return Introspector.getBeanInfo(type);
+            return CachingIntrospector.getBeanInfo(type);
         } catch (IntrospectionException ie) {
             return null;
         }
